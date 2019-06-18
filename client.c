@@ -51,6 +51,25 @@ int main(int argc, char const *argv[])
     char * ans3 = "nokia\n";
     send(sock , ans3 , strlen(ans3) , 0 );  
     sleep(1);
+    char * ans4 = "cabeza de calabaza\n";
+    send(sock , ans4 , strlen(ans4) , 0 );  
+    sleep(1);
+    char * ans5 = "easter_egg\n";
+    send(sock , ans5 , strlen(ans5) , 0 );  
+    sleep(1);
+    char * ans6 = ".runme\n";
+    send(sock , ans6 , strlen(ans6) , 0 );  
+    sleep(1);
+    char * ans7 = "indeterminado\n";
+    send(sock , ans7 , strlen(ans7) , 0 );  
+    sleep(1);
+    char * ans8 = "this is awesome\n";
+    send(sock , ans8 , strlen(ans8) , 0 );  
+    sleep(1);
+    char * ans9 = "cachiporra\n";
+    send(sock , ans9 , strlen(ans9) , 0 );  
+    sleep(1);
+
     while(1) {
         sleep(2);
         memset(string,0,100);
@@ -71,6 +90,7 @@ int main(int argc, char const *argv[])
     //entendido
     //#0854780*
     //nokia
+    //cabeza de calabaza
     return 0;
 } 
 
