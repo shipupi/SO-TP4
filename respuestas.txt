@@ -1,0 +1,66 @@
+----- PREGUNTA PARA INVESTIGAR -----
+¿Cómo descubrieron el protocolo, la dirección y el puerto para conectarse?
+------------- RESPUESTA -------------
+Corrimos el servidor en background y corrimos el comando lsof -i -P -n | grep LISTEN que nos mostraba los puertos abiertos.
+----- PREGUNTA PARA INVESTIGAR -----
+¿Qué diferencias hay entre TCP y UDP y en qué casos conviene usar cada uno?
+------------- RESPUESTA -------------
+https://www.redeszone.net/2011/01/28/la-capa-de-transporte-en-internet-tcp-y-udp-sobre-ip-volumen-i/
+
+¿Cómo se envían los datos por la red?
+¿Es fiable la transmisión de los datos?
+¿Se puede recuperar una información que llega dañada o que simplemente no llega?
+¿Nos garantizan los protocolos de transporte como TCP y UDP la entrega correcta de los datos?
+
+Todas estas preguntas, serán respondidas a continuación.
+
+En internet, se utiliza TCP/IP para el transporte (esto también incluye UDP), vamos a explicar cada protocolo de una forma general para más adelante entrar en detalles más técnicos.
+
+UDP significa User Datagram Protocol, proporciona un servicio no orientado a conexión y no fiable, esto quiere decir que se va a intentar por todos los medios que los datos lleguen, pero no lo garantiza.
+
+TCP significa Transmission Control Protocol, proporciona un servicio orientado a conexión y fiable.
+
+Cuando el desarrollador de la aplicación decide cual de los dos protocolos usar, lo ha de hacer a la hora de crear los sockets como ya vimos anteriormente:
+
+Taller de Prácticas : Cliente y Servidor UDP en Java
+Taller de Prácticas : Cliente y Servidor TCP en Java
+
+Tanto TCP como UDP trabajan sobre el protocolo de la capa de red de Internet, que es el protocolo IP.
+
+IP proporciona una comunicación lógica entre hosts. IP es «best effort», es decir, no garantiza que pueda entregar los segmentos entre los hosts pero hará lo que pueda para hacerlo correctamente.
+
+– No garantiza la llegada de los segmentos.
+– No garantiza el orden.
+– No garantiza la integridad (que si llegan, lleguen correctos).
+
+Por todo esto, IP es un servicio no fiable.
+
+Antes de continuar, debemos tener claro que cada host ha de tener una dirección IP. Lo que hace TCP y UDP es ampliar el servicio que proporciona IP entre dos host, de esta forma podremos tener varios procesos ejecutándose en los host y podremos comunicarnos con ellos. Eso se llama multiplexación y demultiplexación de la capa de transporte.
+
+TCP y UDP proporcionan servicios de comprobación de errores. UDP sólo proporciona esta comprobación y la entrega de datos de proceso a proceso en cada host, recordemos que UDP es no fiable y no garantiza la integridad (como IP).
+
+TCP sí proporciona una transferencia de datos fiable, también proporciona control de flujo, números de secuencia, mensajes de reconocimiento y temporizadores. TCP garantiza que los mensajes se envíen correctamente (control de errores,evitar datos duplicados y recuperación ante pérdidas) y en orden. TCP al estar sobre IP, convierte IP en un servicio de transporte de datos fiable.
+
+TCP también nos proporciona control de congestión, para no colapsar los enlaces (routers, nodos intermedios) y que la intensidad de tráfico se acerque peligrosamente a 1 y empiecen los encolamientos, e incluso la pérdida de paquetes por llenar los buffers de los routers. TCP se encarga de asignar el mismo ancho de banda a todas sus conexiones para que todas ellas puedan enviar y recibir datos.
+
+UDP no proporciona control de congestión, por tanto podrá enviar los datos a cualquier velocidad sin tener en cuenta la posible saturación de los nodos.
+
+¿Cómo se envían los datos por la red? Se envían mediante TCP y UDP
+¿Es fiable la transmisión de los datos? Con TCP sí ya que lo garantiza, pero UDP no garantiza la transmisión fiable.
+¿Se puede recuperar una información que llega dañada o que simplemente no llega? Tanto TCP como UDP tiene comprobación de errores, cuando se recibe una información dañada o no llega, se retransmite, más adelante lo veremos de una forma muy técnica.
+¿Nos garantizan los protocolos de transporte como TCP y UDP la entrega correcta de los datos? TCP sí, UDP no.
+----- PREGUNTA PARA INVESTIGAR -----
+¿El puerto que usaron para conectarse al server es el mismo que usan para mandar las respuestas? ¿Por qué?
+------------- RESPUESTA -------------
+https://www.cs.buap.mx/~mtovar/doc/PCPA/Sockets.pdf
+Porque en eso puerto escucha el servidor.
+----- PREGUNTA PARA INVESTIGAR -----
+¿Qué útil abstracción es utilizada para comunicarse con sockets? ¿se puede utilizar read(2) y write(2) para operar?
+------------- RESPUESTA -------------
+So read(2) will always return the data written in write(2) for a TCP socket.
+----- PREGUNTA PARA INVESTIGAR -----
+¿Cómo garantiza TCP que los paquetes llegan en orden y no se pierden?
+------------- RESPUESTA -------------
+https://www.dsi.uclm.es/personal/miguelfgraciani/mikicurri/Docencia/LenguajesInternet0910/web_LI/Teoria/Protocolos%20de%20bajo%20nivel/Protocolo%20TCP.htm
+Durante la etapa de transferencia de datos, una serie de mecanismos claves determinan la fiabilidad y robustez del protocolo. Entre ellos están incluidos el uso del número de secuencia para ordenar los segmentos TCP recibidos y detectar paquetes duplicados, checksums para detectar errores, y asentimientos y temporizadores para detectar pérdidas y retrasos.
+

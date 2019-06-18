@@ -1,0 +1,44 @@
+------------- DESAFIO -------------
+Bienvenidos al TP4 y felicitaciones, ya resolvieron el primer acertijo.
+
+En este TP deberán finalizar el juego que ya comenzaron resolviendo los desafíos de cada nivel.
+Además tendrán que investigar otras preguntas para responder durante la defensa.
+El desafío final consiste en crear un servidor que se comporte igual que yo, además del cliente para comunicarse con el mismo.
+
+Deberán estar atentos a los desafios ocultos.
+
+Para verificar que sus respuestas tienen el formato correcto respondan a este desafío con "entendido\n"
+
+----- PREGUNTA PARA INVESTIGAR -----
+¿Cómo descubrieron el protocolo, la dirección y el puerto para conectarse?
+
+
+
+------------- DESAFIO -------------
+# \033[D \033[A \033[A \033[D \033[B \033[C \033[B \033[D *
+
+----- PREGUNTA PARA INVESTIGAR -----
+¿Qué diferencias hay entre TCP y UDP y en qué casos conviene usar cada uno?
+
+
+------------- DESAFIO -------------
+https://vocaroo.com/i/s19015zmR4t8
+
+----- PREGUNTA PARA INVESTIGAR -----
+¿El puerto que usaron para conectarse al server es el mismo que usan para mandar las respuestas? ¿Por qué?
+
+------------- DESAFIO -------------
+EBADF... abrilo y verás
+
+----- PREGUNTA PARA INVESTIGAR -----
+¿Qué útil abstracción es utilizada para comunicarse con sockets? ¿se puede utilizar read(2) y write(2) para operar?
+
+------------- DESAFIO -------------
+respuesta = strings[224]
+
+----- PREGUNTA PARA INVESTIGAR -----
+¿Cómo garantiza TCP que los paquetes llegan en orden y no se pierden?
+
+
+
+
