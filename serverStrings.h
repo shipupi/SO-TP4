@@ -4,7 +4,7 @@
 static const char *answers[] = {\
 	"entendido\n",
 	"r1\n",
-	"r2\n",
+	"hola\n",
 	"r3\n"
 };
 
@@ -20,7 +20,7 @@ Para verificar que sus respuestas tienen el formato correcto respondan a este de
 ¿Cómo descubrieron el protocolo, la dirección y el puerto para conectarse?\n\n\
 (nosotros usamos el programa lsof)\n\n",
 	"Pregunta 2\n",
-	"Pregunta 3\n",
+	"Pregunta 3\n.... --- .-.. .-\n",
 	"Pregunta 4\n",
 };
 

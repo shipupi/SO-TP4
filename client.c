@@ -9,7 +9,7 @@
 #include <signal.h> 
 
 #define PORTSIZE 10
-// #define PORT 23423 // Port de consigna
+// #define PORT 23423 //  Port de consigna
 #define PORT 12345 // Port de nuestro server
    
 int main(int argc, char const *argv[]) 

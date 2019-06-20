@@ -35,6 +35,13 @@ void func(int sockfd)
             exit(1);
         }
 
+        // Morse Code
+        if (challenge == 2)
+        {
+            printf(".... --- .-.. .-\n");
+            
+        }
+
         // Challenge specific functions
         if (challenge == 3)
         {
