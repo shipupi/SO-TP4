@@ -1,4 +1,4 @@
-all: client client2 myserver wrapper
+all: client myserver wrapper
 
 client: client.c 
 	gcc -o client client.c  -I.

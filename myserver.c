@@ -20,6 +20,7 @@ void func(int sockfd)
     char buff[MAX]; 
     int n;
     int challenge = 0;
+    int length;
     // infinite loop for chat 
     while(1) {
 
@@ -27,7 +28,11 @@ void func(int sockfd)
         bzero(buff, MAX); 
   
         // read the message from client and copy it in buffer 
-        read(sockfd, buff, sizeof(buff)); 
+        length = read(sockfd, buff, sizeof(buff)); 
+        if(length == 0) {
+            // Client was closed
+            exit(1);
+        }   
         // print buffer which contains the client contents
         if (strcmp(buff, answers[challenge]) == 0)
         {
