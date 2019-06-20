@@ -2,10 +2,10 @@
 #define SERVERSTRINGS_H
 
 static const char *answers[] = {\
-	"entendido\n"
-	"respuesta 2\n",
-	"respuesta 3\n",
-	"respuesta 4\n"
+	"entendido\n",
+	"r1\n",
+	"r2\n",
+	"r3\n"
 };
 
 static const char *questions[] = {\

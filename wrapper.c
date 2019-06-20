@@ -32,7 +32,7 @@ int main (int argc, char *argv[]){
 	  char *args[2];
       args[0] = "";
       args[1] = NULL;
-      execv("./server", args);
+      execv("./myserver", args);
 
       perror("Error en exec");
       exit(EXIT_FAILURE);

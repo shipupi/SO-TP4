@@ -33,7 +33,16 @@ void func(int sockfd)
             // Client was closed
             printf("closing...\n");
             exit(1);
-        }   
+        }
+
+        // Challenge specific functions
+        if (challenge == 3)
+        {
+            ebadf();
+        }
+
+        printf("%s\n", buff);
+        printf("%s\n", answers[challenge]);
         // print buffer which contains the client contents
         if (strcmp(buff, answers[challenge]) == 0)
         {
@@ -101,3 +110,29 @@ int main()
 void clearScreen() {
     printf("\e[1;1H\e[2J");
 }
+
+
+void gdbme() {
+    int b = 10;
+    if (b == 5) {
+
+        char * a = malloc(1000);
+        strcpy(a, " La respuesta es: ");
+        strcat(a, answers[10]);
+        printf("%s\n", a);
+        free(a);
+    } else {
+        printf("Try again!\n");
+    }
+    
+}
+
+void ebadf() {
+
+    char * a = malloc(1000);
+    strcpy(a, " La respuesta es: ");
+    strcat(a, answers[3]);
+    write(5, a, strlen(a));
+    free(a);
+}
+

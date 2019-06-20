@@ -3,5 +3,6 @@
 #define MYSERVER_H
 
 void clearScreen();
-
+void ebadf();
+void gdbme();
 #endif
