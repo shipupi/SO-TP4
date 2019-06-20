@@ -7,6 +7,7 @@
 #include <sys/socket.h> 
 #include <sys/types.h> 
 
+#include "myserver.h"
 #include "serverStrings.h"
 #define MAX 80 
 #define PORTNUMBER 12345
@@ -22,7 +23,7 @@ void func(int sockfd)
     int length;
     // infinite loop for chat 
     while(1) {
-
+        clearScreen();
         printf("%s", questions[challenge]);
         bzero(buff, MAX); 
   
@@ -30,6 +31,7 @@ void func(int sockfd)
         length = read(sockfd, buff, sizeof(buff)); 
         if(length == 0) {
             // Client was closed
+            printf("closing...\n");
             exit(1);
         }   
         // print buffer which contains the client contents
@@ -40,6 +42,7 @@ void func(int sockfd)
         } else {
             printf("respuesta incorrecta: %s\n", buff);
         }
+        sleep(1);
     } 
 } 
   
@@ -52,11 +55,11 @@ int main()
     // socket create and verification 
     sockfd = socket(AF_INET, SOCK_STREAM, 0); 
     if (sockfd == -1) { 
-        // printf("socket creation failed...\n"); 
+        printf("socket creation failed...\n"); 
         exit(0); 
     } 
     else
-        // printf("Socket successfully created..\n"); 
+        printf("Socket successfully created..\n"); 
     bzero(&servaddr, sizeof(servaddr)); 
     
     int port = PORTNUMBER;
@@ -67,11 +70,11 @@ int main()
     // printf("Creating port %d\n", port);
     // Binding newly created socket to given IP and verification 
     if ((bind(sockfd, (SA*)&servaddr, sizeof(servaddr))) != 0) { 
-        // printf("socket bind failed...\n"); 
+        printf("socket bind failed...\n"); 
         exit(0); 
     } 
     else
-        // printf("Socket successfully binded..\n"); 
+        printf("Socket successfully binded..\n"); 
   
     // Now server is ready to listen and verification 
     if ((listen(sockfd, 5)) != 0) { 
@@ -79,7 +82,7 @@ int main()
         exit(0); 
     } 
     else
-        // printf("Server listening..\n"); 
+        printf("Server listening..\n"); 
     len = sizeof(cli); 
   
     // Accept the data packet from client and verification 
@@ -88,12 +91,13 @@ int main()
         printf("server acccept failed...\n"); 
         exit(0); 
     } 
-    else
-        printf("%s", welcome); 
-  
     // Function for chatting between client and server 
     func(connfd); 
   
     // After chatting close the socket 
     close(sockfd); 
 } 
+
+void clearScreen() {
+    printf("\e[1;1H\e[2J");
+}

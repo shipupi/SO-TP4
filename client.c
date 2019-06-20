@@ -94,10 +94,6 @@ int main(int argc, char const *argv[])
     // valread = read( sock , buffer, 1024); 
     // printf("%s\n",buffer ); 
 
-    //entendido
-    //#0854780*
-    //nokia
-    //cabeza de calabaza
     return 0;
 } 
 
