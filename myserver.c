@@ -18,7 +18,6 @@
 void func(int sockfd) 
 { 
     char buff[MAX]; 
-    int n;
     int challenge = 0;
     int length;
     // infinite loop for chat 
@@ -41,21 +40,6 @@ void func(int sockfd)
         } else {
             printf("respuesta incorrecta: %s\n", buff);
         }
-        // printf("From client: %s\t To client : ", buff); 
-        bzero(buff, MAX); 
-        n = 0; 
-        // copy server message in the buffer 
-        // while ((buff[n++] = getchar()) != '\n') 
-        //     ; 
-  
-        // // and send that buffer to client 
-        // write(sockfd, buff, sizeof(buff)); 
-  
-        // // if msg contains "Exit" then server exit and chat ended. 
-        // if (strncmp("exit", buff, 4) == 0) { 
-        //     printf("Server Exit...\n"); 
-        //     break; 
-        // } 
     } 
 } 
   
