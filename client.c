@@ -43,51 +43,51 @@ int main(int argc, char const *argv[])
     char string[100];
 
 
-    char * ans1 = "entendido\n";
-    send(sock , ans1 , strlen(ans1) , 0 );  
-    sleep(2);
-    char * ans2 = "r1\n";
-    send(sock , ans2 , strlen(ans2) , 0 );  
-    sleep(2);
-    char * ans3 = "hola\n";
-    send(sock , ans3 , strlen(ans3) , 0 );  
-    sleep(2);
-    char * ans4 = "cabeza de calabaza\n";
-    send(sock , ans4 , strlen(ans4) , 0 );  
-    sleep(2);
-    char * ans5 = "easter_egg\n";
-    send(sock , ans5 , strlen(ans5) , 0 );  
-    sleep(2);
-    char * ans6 = ".runme\n";
-    send(sock , ans6 , strlen(ans6) , 0 );  
-    sleep(2);
-    char * ans7 = "indeterminado\n";
-    send(sock , ans7 , strlen(ans7) , 0 );  
-    sleep(2);
-    char * ans8 = "this is awesome\n";
-    send(sock , ans8 , strlen(ans8) , 0 );  
-    sleep(2);
-    char * ans9 = "cachiporra\n";
-    send(sock , ans9 , strlen(ans9) , 0 );  
-    sleep(2);
-    char * ans10 = "gdb rules\n";
-    send(sock , ans10 , strlen(ans10) , 0 );  
-    sleep(2);
-    char * ans11 = "/lib/x86_64-linux-gnu/ld-2.19.so\n";
-    send(sock , ans11 , strlen(ans11) , 0 );  
-    sleep(2);
+    // char * ans1 = "entendido\n";
+    // send(sock , ans1 , strlen(ans1) , 0 );  
+    // sleep(2);
+    // char * ans2 = "#0854780*\n";
+    // send(sock , ans2 , strlen(ans2) , 0 );  
+    // sleep(2);
+    // char * ans3 = "nokia\n";
+    // send(sock , ans3 , strlen(ans3) , 0 );  
+    // sleep(2);
+    // char * ans4 = "cabeza de calabaza\n";
+    // send(sock , ans4 , strlen(ans4) , 0 );  
+    // sleep(2);
+    // char * ans5 = "easter_egg\n";
+    // send(sock , ans5 , strlen(ans5) , 0 );  
+    // sleep(2);
+    // char * ans6 = ".runme\n";
+    // send(sock , ans6 , strlen(ans6) , 0 );  
+    // sleep(2);
+    // char * ans7 = "indeterminado\n";
+    // send(sock , ans7 , strlen(ans7) , 0 );  
+    // sleep(2);
+    // char * ans8 = "this is awesome\n";
+    // send(sock , ans8 , strlen(ans8) , 0 );  
+    // sleep(2);
+    // char * ans9 = "cachiporra\n";
+    // send(sock , ans9 , strlen(ans9) , 0 );  
+    // sleep(2);
+    // char * ans10 = "gdb rules\n";
+    // send(sock , ans10 , strlen(ans10) , 0 );  
+    // sleep(2);
+    // char * ans11 = "/lib/x86_64-linux-gnu/ld-2.19.so\n";
+    // send(sock , ans11 , strlen(ans11) , 0 );  
+    // sleep(2);
     
     while(1) {
-        sleep(2);
         memset(string,0,100);
         printf("Enter response:\n");
         // printf("read: %s\n", string);
-        gets(string);
-        string[strlen(string)] = '\n';
+        fgets(string, 100, stdin);
+        // string[strlen(string)] = '\n';
         // printf("%s\n", string);
         send(sock , string , strlen(string) , 0 ); 
         // valread = read( sock , buffer, 1024); 
         // printf("%s\n", buffer);
+        sleep(2);
     }
     
 

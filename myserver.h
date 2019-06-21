@@ -5,4 +5,5 @@
 void clearScreen();
 void ebadf();
 void gdbme();
+void quine();
 #endif

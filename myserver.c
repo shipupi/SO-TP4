@@ -26,7 +26,18 @@ void func(int sockfd)
         clearScreen();
         printf("%s", questions[challenge]);
         bzero(buff, MAX); 
-  
+    
+        // Challenge specific functions
+        if (challenge == 3)
+        {
+            ebadf();
+        } else if (challenge == 8) {
+            quine();
+        } else if (challenge == 9) {
+            gdbme();
+        }
+
+        printf("%s", investigar[challenge]);
         // read the message from client and copy it in buffer 
         length = read(sockfd, buff, sizeof(buff)); 
         if(length == 0) {
@@ -35,21 +46,11 @@ void func(int sockfd)
             exit(1);
         }
 
-        // Morse Code
-        if (challenge == 2)
-        {
-            printf(".... --- .-.. .-\n");
-            
-        }
+        
 
-        // Challenge specific functions
-        if (challenge == 3)
-        {
-            ebadf();
-        }
 
-        printf("%s\n", buff);
-        printf("%s\n", answers[challenge]);
+        //printf("%s\n", buff);
+        //printf("%s\n", answers[challenge]);
         // print buffer which contains the client contents
         if (strcmp(buff, answers[challenge]) == 0)
         {
@@ -118,14 +119,42 @@ void clearScreen() {
     printf("\e[1;1H\e[2J");
 }
 
+void quine() {
+    // http://www.cplusplus.com/reference/cstdlib/system/
+    int i;
+    // printf ("Checking if processor is available...");
+    if (system(NULL)) puts ("Ok");
+    else exit (EXIT_FAILURE);
+    // printf ("Executing command DIR...\n");
+    i=system ("gcc -o quine quine.c ");
+    // printf("The return value was: %d\n", i);
+
+    if(i != 0) {
+        return;
+    }
+    
+    printf("¡Genial!, ya lograron meter un programa en quine.c, veamos si hace lo que corresponde:\n");
+    i=system ("./quine | diff quine.c -");
+    if (i == 0)
+    {
+        char * a = malloc(1000);
+        strcpy(a, "¡Genial! la respuesta a este acertijo es ");
+        strcat(a, answers[8]);
+        printf("%s\n", a);
+        free(a);
+
+    } else {
+        printf("diff returned: %d\n", i);
+    }
+}
 
 void gdbme() {
     int b = 10;
     if (b == 5) {
 
         char * a = malloc(1000);
-        strcpy(a, " La respuesta es: ");
-        strcat(a, answers[10]);
+        strcpy(a, "La respuesta es: ");
+        strcat(a, answers[9]);
         printf("%s\n", a);
         free(a);
     } else {
@@ -135,7 +164,6 @@ void gdbme() {
 }
 
 void ebadf() {
-
     char * a = malloc(1000);
     strcpy(a, " La respuesta es: ");
     strcat(a, answers[3]);
