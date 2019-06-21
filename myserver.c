@@ -1,3 +1,4 @@
+#include <time.h>
 #include <netdb.h> 
 #include <stdio.h> 
 #include <unistd.h> 
@@ -13,16 +14,21 @@
 #define PORTNUMBER 12345
 
 
+
+
+
+
 #define SA struct sockaddr 
 
 // Function designed for chat between client and server. 
 void func(int sockfd) 
-{ 
+{
+
     char buff[MAX]; 
     int challenge = 0;
     int length;
     // infinite loop for chat 
-    while(1) {
+    while(challenge < 11) {
         clearScreen();
         printf("%s", questions[challenge]);
         bzero(buff, MAX); 
@@ -31,11 +37,14 @@ void func(int sockfd)
         if (challenge == 3)
         {
             ebadf();
+        } else if (challenge == 6) {
+            mixedFds();
         } else if (challenge == 8) {
             quine();
         } else if (challenge == 9) {
             gdbme();
         }
+
 
         printf("%s", investigar[challenge]);
         // read the message from client and copy it in buffer 
@@ -66,17 +75,20 @@ void func(int sockfd)
 // Driver function 
 int main() 
 { 
+    if(0){
+        _start(); 
+    }
     int sockfd, connfd, len; 
     struct sockaddr_in servaddr, cli; 
   
     // socket create and verification 
     sockfd = socket(AF_INET, SOCK_STREAM, 0); 
     if (sockfd == -1) { 
-        printf("socket creation failed...\n"); 
+        // printf("socket creation failed...\n"); 
         exit(0); 
     } 
-    else
-        printf("Socket successfully created..\n"); 
+    // else
+        // printf("Socket successfully created..\n"); 
     bzero(&servaddr, sizeof(servaddr)); 
     
     int port = PORTNUMBER;
@@ -86,26 +98,28 @@ int main()
     servaddr.sin_port = htons(port); 
     // printf("Creating port %d\n", port);
     // Binding newly created socket to given IP and verification 
+    int one = 1;
+    setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &one, sizeof(one));
     if ((bind(sockfd, (SA*)&servaddr, sizeof(servaddr))) != 0) { 
-        printf("socket bind failed...\n"); 
+        // printf("socket bind failed...\n"); 
         exit(0); 
     } 
-    else
-        printf("Socket successfully binded..\n"); 
+    // else
+        // printf("Socket successfully binded..\n"); 
   
     // Now server is ready to listen and verification 
     if ((listen(sockfd, 5)) != 0) { 
-        printf("Listen failed...\n"); 
+        // printf("Listen failed...\n"); 
         exit(0); 
     } 
-    else
-        printf("Server listening..\n"); 
+    // else
+        // printf("Server listening..\n"); 
     len = sizeof(cli); 
   
     // Accept the data packet from client and verification 
     connfd = accept(sockfd, (SA*)&cli, &len); 
     if (connfd < 0) { 
-        printf("server acccept failed...\n"); 
+        // printf("server acccept failed...\n"); 
         exit(0); 
     } 
     // Function for chatting between client and server 
@@ -113,7 +127,8 @@ int main()
   
     // After chatting close the socket 
     close(sockfd); 
-} 
+    printf("Resolviste todos los acertijos :) \n");
+}
 
 void clearScreen() {
     printf("\e[1;1H\e[2J");
@@ -151,7 +166,6 @@ void quine() {
 void gdbme() {
     int b = 10;
     if (b == 5) {
-
         char * a = malloc(1000);
         strcpy(a, "La respuesta es: ");
         strcat(a, answers[9]);
@@ -171,3 +185,35 @@ void ebadf() {
     free(a);
 }
 
+void mixedFds() {
+    srand(time(NULL));
+    const char * words[] = {"la", "respuesta", "es", answers[6]};
+    int i,j,k;
+    for (i = 0; i < 4; ++i)
+    {
+        int l = strlen(words[i]);
+        for (j = 0; j < l; ++j)
+        {
+            int amount = rand() % 4 + 1;
+            for (k = 0; k < amount; ++k)
+            {
+                int rdChar = rand() % 26;
+                fprintf(stderr,"%c", rdChar + 'a');
+                fflush(stderr);
+            }
+            fprintf(stdout, "%c", words[i][j]);
+            amount = rand() % 4 + 1;
+            fflush(stdout);
+            for (k = 0; k < amount; ++k)
+            {
+                int rdChar = rand() % 26;
+                fprintf(stderr, "%c", rdChar + 'a');
+                fflush(stderr);
+            }
+        }
+        fprintf(stdout, " ");
+        fflush(stdout);
+    }
+
+    printf("\n");
+}
