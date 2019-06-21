@@ -9,7 +9,7 @@ https://github.com/shipupi/SO-TP4
 ## Commit
 
 ```
-Ultimo commit
+Master branch - Ultimo commit
 ```
 
 ## Instrucciones de ejecucion:
