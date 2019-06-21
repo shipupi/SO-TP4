@@ -9,5 +9,9 @@ https://github.com/shipupi/SO-TP4
 ## Commit
 
 ```
-62037cc6f5a73a9db71f8e2a78102b0e40d3cba4
+Ultimo commit
 ```
+
+## Instrucciones de ejecucion:
+
+	Correr el archivo 'myserver'
